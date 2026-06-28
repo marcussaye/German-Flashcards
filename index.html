@@ -352,12 +352,6 @@
   </div>
 </div>
 
-<div class="new-cards-bar" id="newCardsBar">
-  <label>New cards/day</label>
-  <input type="range" min="5" max="30" step="5" id="newCardsSlider" value="10" oninput="updateNewCards(this.value)">
-  <div class="new-cards-val" id="newCardsVal">10</div>
-</div>
-
 <div class="heatmap-block" id="heatmapBlock">
   <div class="heatmap-title">Study activity — last 16 weeks</div>
   <div class="heatmap-grid" id="heatmapGrid"></div>
@@ -424,7 +418,7 @@
   </button>
 </div>
 
-<div class="undo-bar">
+<div class="undo-bar" style="display:none">
   <button class="btn-undo" id="undoBtn" onclick="undoLast()" disabled>
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg>
     Undo last
@@ -470,6 +464,11 @@
       <div class="val" id="startTotal">0</div>
       <div class="lbl">Total</div>
     </div>
+  </div>
+  <div class="new-cards-bar" id="newCardsBar" style="margin-bottom:20px; background:transparent; border:none; padding:0;">
+    <label>New cards today</label>
+    <input type="range" min="5" max="30" step="5" id="newCardsSlider" value="10" oninput="updateNewCards(this.value)">
+    <div class="new-cards-val" id="newCardsVal">10</div>
   </div>
   <button class="btn-start" id="startBtn" onclick="beginSession()">Start Session</button>
   <div class="no-cards-msg" id="noCardsMsg" style="display:none">No cards due — use Study Ahead below to get ahead</div>
@@ -2863,8 +2862,20 @@ function nextCard() {
 
 function updateNewCards(val) {
   DAILY_NEW = parseInt(val);
-  localStorage.setItem('dk_daily_new', String(DAILY_NEW));
   document.getElementById('newCardsVal').textContent = val;
+  // Refresh the start screen counts live as slider moves
+  const srsData = loadSRS();
+  const now = Date.now();
+  const dirs = getDirections();
+  const allCards = [];
+  for (const dir of dirs) { for (const v of VOCAB) allCards.push({v, dir}); }
+  const reviews = allCards.filter(c => { const k = srsKey(c.v, c.dir); return srsData[k] && srsData[k].due <= now; });
+  const newCards = allCards.filter(c => !srsData[srsKey(c.v, c.dir)]).slice(0, DAILY_NEW);
+  document.getElementById('startNew').textContent = newCards.length;
+  document.getElementById('startTotal').textContent = reviews.length + newCards.length;
+  const hasCards = (reviews.length + newCards.length) > 0;
+  document.getElementById('startBtn').style.display = hasCards ? 'block' : 'none';
+  document.getElementById('noCardsMsg').style.display = hasCards ? 'none' : 'block';
 }
 
 function buildHeatmap() {
@@ -3080,7 +3091,6 @@ function updatePills() {
 }
 
 function showStudyUI() {
-  document.getElementById('newCardsBar').style.display = 'none';
   document.getElementById('heatmapBlock').style.display = 'none';
   document.getElementById('startScreen').classList.remove('visible');
   document.querySelector('.card-wrapper').style.display = 'block';
@@ -3089,11 +3099,11 @@ function showStudyUI() {
   document.getElementById('flipHint').style.display = 'block';
   document.getElementById('flipHint').style.opacity = '1';
   document.getElementById('undoBtn').disabled = true;
+  document.querySelector('.undo-bar').style.display = 'flex';
   lastAction = null;
 }
 
 function showDone() {
-  document.getElementById('newCardsBar').style.display = '';
   document.getElementById('heatmapBlock').style.display = '';
   document.querySelector('.card-wrapper').style.display = 'none';
   document.getElementById('answerSection').style.display = 'none';
@@ -3152,12 +3162,32 @@ function showStartScreen() {
   document.getElementById('ratingButtons').style.display = 'none';
   document.getElementById('flipHint').style.display = 'none';
   document.getElementById('undoBtn').disabled = true;
+  document.querySelector('.undo-bar').style.display = 'none';
   lastAction = null;
+  // Only show new-cards slider if user hasn't started today yet
+  const showSlider = !hasStudiedToday();
+  document.getElementById('newCardsBar').style.display = showSlider ? 'flex' : 'none';
+  if (showSlider) {
+    DAILY_NEW = 10;
+    document.getElementById('newCardsSlider').value = 10;
+    document.getElementById('newCardsVal').textContent = 10;
+  }
   buildHeatmap();
   updateMastery();
 }
 
+function hasStudiedToday() {
+  const h = loadHistory();
+  const today = new Date().toISOString().slice(0,10);
+  return (h[today] || 0) > 0;
+}
+
 function beginSession() {
+  // Mark that we've started today so slider hides on return
+  const h = loadHistory();
+  const today = new Date().toISOString().slice(0,10);
+  if (!h[today]) { h[today] = 0; saveHistory(h); }
+
   document.getElementById('startScreen').classList.remove('visible');
   buildQueue();
   if (queue.length === 0 && againQueue.length === 0) {
@@ -3175,9 +3205,8 @@ function restartSession() {
 // Init
 document.getElementById('sessionCount').textContent = loadSessionNum();
 document.getElementById('streakCount').textContent = loadStreak().count;
-const savedNew = parseInt(localStorage.getItem('dk_daily_new') || '10');
-document.getElementById('newCardsSlider').value = savedNew;
-document.getElementById('newCardsVal').textContent = savedNew;
+document.getElementById('newCardsSlider').value = DAILY_NEW;
+document.getElementById('newCardsVal').textContent = DAILY_NEW;
 buildHeatmap();
 updateMastery();
 showStartScreen();
