@@ -136,6 +136,57 @@
   .audio-btn.playing { border-color: var(--accent); color: var(--accent); }
   .audio-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
 
+  /* New cards slider */
+  .new-cards-bar {
+    width: 100%; max-width: 480px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 14px 20px; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .new-cards-bar label { font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+  .new-cards-bar input[type=range] { flex: 1; accent-color: var(--accent); cursor: pointer; }
+  .new-cards-val { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--text); min-width: 28px; text-align: right; }
+
+  /* Heatmap */
+  .heatmap-block {
+    width: 100%; max-width: 480px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px 20px; margin-bottom: 16px;
+  }
+  .heatmap-title { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .heatmap-grid { display: flex; gap: 3px; flex-wrap: wrap; }
+  .hm-cell { width: 14px; height: 14px; border-radius: 3px; background: var(--surface2); flex-shrink: 0; }
+  .hm-cell.l1 { background: rgba(124,106,247,0.25); }
+  .hm-cell.l2 { background: rgba(124,106,247,0.5); }
+  .hm-cell.l3 { background: rgba(124,106,247,0.75); }
+  .hm-cell.l4 { background: var(--accent); }
+  .heatmap-legend { display: flex; align-items: center; gap: 4px; margin-top: 10px; font-size: 0.68rem; color: var(--muted); }
+  .heatmap-legend .hm-cell { width: 10px; height: 10px; }
+
+  /* Leech badge */
+  .leech-badge {
+    display: none; position: absolute; top: 12px; right: 14px;
+    background: rgba(248,113,113,0.15); border: 1px solid rgba(248,113,113,0.3);
+    color: var(--red); font-size: 0.65rem; font-weight: 700;
+    padding: 3px 8px; border-radius: 20px; letter-spacing: 0.05em;
+  }
+  .leech-badge.visible { display: block; }
+
+  /* Undo button */
+  .undo-bar {
+    width: 100%; max-width: 480px; display: flex;
+    justify-content: center; margin-bottom: 8px;
+  }
+  .btn-undo {
+    background: transparent; border: 1px solid var(--border);
+    border-radius: 20px; padding: 6px 16px; color: var(--muted);
+    font-size: 0.75rem; font-weight: 500; font-family: 'Inter', sans-serif;
+    cursor: pointer; display: flex; align-items: center; gap: 6px;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .btn-undo:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-undo:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+
   .flip-hint { text-align: center; font-size: 0.75rem; color: var(--muted); margin-bottom: 16px; transition: opacity 0.2s; }
 
   .rating-buttons {
@@ -178,6 +229,70 @@
     font-weight: 600; cursor: pointer; transition: opacity 0.15s;
   }
   .btn-restart:hover { opacity: 0.85; }
+
+  /* Start screen */
+  .start-screen {
+    width: 100%; max-width: 480px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: var(--card-radius);
+    padding: 36px 32px; text-align: center; display: none;
+  }
+  .start-screen.visible { display: block; }
+  .start-screen h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+  .start-screen p { color: var(--muted); font-size: 0.88rem; margin-bottom: 24px; }
+  .start-stats { display: flex; justify-content: center; gap: 28px; margin-bottom: 28px; }
+  .start-stat { text-align: center; }
+  .start-stat .val { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; }
+  .start-stat .lbl { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+  .start-stat.purple .val { color: var(--accent); }
+  .start-stat.green .val { color: var(--green); }
+  .start-stat.muted .val { color: var(--muted); }
+  .btn-start {
+    background: var(--accent); color: white; border: none; border-radius: 12px;
+    padding: 16px 48px; font-family: 'Inter', sans-serif; font-size: 1rem;
+    font-weight: 600; cursor: pointer; transition: opacity 0.15s; width: 100%;
+  }
+  .btn-start:hover { opacity: 0.85; }
+  .no-cards-msg { color: var(--muted); font-size: 0.88rem; margin-top: 8px; }
+
+  /* Study ahead */
+  .study-ahead {
+    margin-top: 16px; display: flex; align-items: center; justify-content: center;
+    gap: 10px; flex-wrap: wrap;
+  }
+  .study-ahead label { font-size: 0.8rem; color: var(--muted); }
+  .study-ahead select {
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+    border-radius: 8px; padding: 6px 10px; font-size: 0.8rem; font-family: 'Inter', sans-serif;
+    cursor: pointer;
+  }
+  .btn-ahead {
+    background: transparent; border: 1px solid var(--accent); color: var(--accent);
+    border-radius: 10px; padding: 8px 16px; font-family: 'Inter', sans-serif;
+    font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-ahead:hover { background: var(--accent-soft); }
+
+  /* Export/import toolbar */
+  .data-toolbar {
+    width: 100%; max-width: 480px; display: flex; gap: 10px;
+    justify-content: flex-end; margin-bottom: 12px;
+  }
+  .btn-data {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: transparent; border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 12px; color: var(--muted);
+    font-size: 0.72rem; font-weight: 600; font-family: 'Inter', sans-serif;
+    cursor: pointer; transition: border-color 0.15s, color 0.15s;
+  }
+  .btn-data:hover { border-color: var(--accent); color: var(--accent); }
+  .toast {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 20px; font-size: 0.82rem; color: var(--text);
+    opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap;
+    z-index: 999;
+  }
+  .toast.show { opacity: 1; }
 </style>
 </head>
 <body>
@@ -189,6 +304,20 @@
     <span>Streak <strong id="streakCount">0</strong>🔥</span>
   </div>
 </header>
+
+<div class="data-toolbar">
+  <button class="btn-data" onclick="exportProgress()">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Export
+  </button>
+  <button class="btn-data" onclick="document.getElementById('importFile').click()">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+    Import
+  </button>
+  <input type="file" id="importFile" accept=".json" style="display:none" onchange="importProgress(event)">
+</div>
+
+<div class="toast" id="toast"></div>
 
 <!-- Direction toggle -->
 <div class="direction-bar">
@@ -223,33 +352,54 @@
   </div>
 </div>
 
-<div class="card-wrapper">
+<div class="new-cards-bar" id="newCardsBar">
+  <label>New cards/day</label>
+  <input type="range" min="5" max="30" step="5" id="newCardsSlider" value="10" oninput="updateNewCards(this.value)">
+  <div class="new-cards-val" id="newCardsVal">10</div>
+</div>
+
+<div class="heatmap-block" id="heatmapBlock">
+  <div class="heatmap-title">Study activity — last 16 weeks</div>
+  <div class="heatmap-grid" id="heatmapGrid"></div>
+  <div class="heatmap-legend">
+    Less
+    <div class="hm-cell"></div>
+    <div class="hm-cell l1"></div>
+    <div class="hm-cell l2"></div>
+    <div class="hm-cell l3"></div>
+    <div class="hm-cell l4"></div>
+    More
+  </div>
+</div>
+
+<div class="card-wrapper" style="display:none">
   <div class="card" id="card" onclick="flipCard()">
+    <div class="leech-badge" id="leechBadge">⚠️ LEECH</div>
     <div class="card-label" id="cardLabel">Deutsch</div>
     <div class="card-word" id="cardWord">—</div>
     <div class="card-sub" id="cardSub"></div>
     <div class="card-hint" id="cardHint">tap to reveal</div>
   </div>
-  <div style="text-align:center">
-    <button id="audioBtnFront" class="audio-btn" onclick="speakCurrent(event)">
+  <div style="text-align:center; display:flex; gap:10px; justify-content:center; margin-top:4px;">
+    <button class="audio-btn" onclick="speakWord(event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      <span>Word</span>
+    </button>
+    <button class="audio-btn" onclick="speakExample(event)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-      <span>Pronounce</span>
+      <span>Example</span>
     </button>
   </div>
 </div>
 
-<div class="answer-section" id="answerSection">
+<div class="answer-section" id="answerSection" style="display:none">
   <div class="answer-label" id="answerLabel">English</div>
   <div class="answer-word" id="answerWord"></div>
   <div class="answer-ex-de" id="answerExDe"></div>
   <div class="answer-ex-en" id="answerExEn"></div>
-  <button id="audioBtnBack" class="audio-btn" onclick="speakCurrent(event)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-    <span>Pronounce</span>
-  </button>
 </div>
 
-<div class="flip-hint" id="flipHint">Tap the card to reveal the answer</div>
+<div class="flip-hint" id="flipHint" style="display:none">Tap the card to reveal the answer</div>
 
 <div class="rating-buttons hidden" id="ratingButtons">
   <button class="btn-rate btn-again" onclick="rate(0)">
@@ -274,6 +424,13 @@
   </button>
 </div>
 
+<div class="undo-bar">
+  <button class="btn-undo" id="undoBtn" onclick="undoLast()" disabled>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg>
+    Undo last
+  </button>
+</div>
+
 <div class="done-screen" id="doneScreen">
   <div class="done-emoji">🎉</div>
   <h2>Session complete!</h2>
@@ -284,6 +441,38 @@
     <div class="done-stat red"><div class="val" id="doneAgain">0</div><div class="lbl">Again</div></div>
   </div>
   <button class="btn-restart" onclick="restartSession()">Study Again</button>
+  <div class="study-ahead">
+    <label>Jump ahead:</label>
+    <select id="aheadDays">
+      <option value="1">1 day</option>
+      <option value="2">2 days</option>
+      <option value="3">3 days</option>
+      <option value="5">5 days</option>
+      <option value="7">7 days</option>
+    </select>
+    <button class="btn-ahead" onclick="studyAhead()">Study Ahead</button>
+  </div>
+</div>
+
+<div class="start-screen" id="startScreen">
+  <h2 id="startGreeting">Ready to study?</h2>
+  <p id="startSubtitle">Here's what's waiting for you today</p>
+  <div class="start-stats">
+    <div class="start-stat purple">
+      <div class="val" id="startNew">0</div>
+      <div class="lbl">New</div>
+    </div>
+    <div class="start-stat green">
+      <div class="val" id="startReview">0</div>
+      <div class="lbl">Review</div>
+    </div>
+    <div class="start-stat muted">
+      <div class="val" id="startTotal">0</div>
+      <div class="lbl">Total</div>
+    </div>
+  </div>
+  <button class="btn-start" id="startBtn" onclick="beginSession()">Start Session</button>
+  <div class="no-cards-msg" id="noCardsMsg" style="display:none">No cards due — use Study Ahead below to get ahead</div>
 </div>
 
 <script>
@@ -2511,7 +2700,9 @@ function intervalLabel(dueIn) {
   return Math.round(dueIn/86400000)+'d';
 }
 
-const DAILY_NEW = 10;
+const LEECH_THRESHOLD = 8;
+const HISTORY_KEY = 'dk_history_v1';
+let DAILY_NEW = parseInt(localStorage.getItem('dk_daily_new') || '10');
 let srs={}, queue=[], againQueue=[], current=null, flipped=false;
 let sessionStats={good:0,hard:0,again:0}, totalInSession=0, doneInSession=0;
 let direction = 'de'; // 'de', 'en', 'mix'
@@ -2527,6 +2718,89 @@ function getDirections() {
   if (direction === 'de') return ['de'];
   if (direction === 'en') return ['en'];
   return ['de', 'en']; // mix
+}
+
+// ── Export / Import ───────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function exportProgress() {
+  const data = {
+    srs: loadSRS(),
+    streak: loadStreak(),
+    session: loadSessionNum(),
+    exported: new Date().toISOString()
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'deutsch-karten-progress.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('✓ Progress exported');
+}
+
+function importProgress(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.srs) localStorage.setItem(SRS_KEY, JSON.stringify(data.srs));
+      if (data.streak) localStorage.setItem(STREAK_KEY, JSON.stringify(data.streak));
+      if (data.session) localStorage.setItem(SESSION_KEY, String(data.session));
+      showToast('✓ Progress imported — reloading…');
+      setTimeout(() => location.reload(), 1200);
+    } catch {
+      showToast('✗ Invalid file');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+// ── Study Ahead ───────────────────────────────────────────────────────────
+function studyAhead() {
+  const days = parseInt(document.getElementById('aheadDays').value);
+  const futureTime = Date.now() + days * 86400000;
+  srs = loadSRS();
+  const dirs = getDirections();
+
+  const allCards = [];
+  for (const dir of dirs) {
+    for (const v of VOCAB) allCards.push({v, dir});
+  }
+
+  const now = Date.now();
+  const aheadCards = allCards.filter(c => {
+    const k = srsKey(c.v, c.dir);
+    return srs[k] && srs[k].due > now && srs[k].due <= futureTime;
+  });
+
+  const newCards = allCards.filter(c => !srs[srsKey(c.v, c.dir)]).slice(0, DAILY_NEW);
+
+  if (aheadCards.length === 0 && newCards.length === 0) {
+    showToast('No cards due in that window');
+    return;
+  }
+
+  queue = shuffle([...aheadCards, ...newCards]);
+  againQueue = [];
+  totalInSession = queue.length;
+  doneInSession = 0;
+  sessionStats = {good:0, hard:0, again:0};
+
+  showStudyUI();
+  document.getElementById('doneScreen').classList.remove('visible');
+
+  showToast(`Studying ${queue.length} cards from next ${days} day${days>1?'s':''}`);
+  nextCard();
 }
 
 function buildQueue() {
@@ -2562,21 +2836,20 @@ function setDirection(dir) {
   document.getElementById('btnDE').classList.toggle('active', dir==='de');
   document.getElementById('btnEN').classList.toggle('active', dir==='en');
   document.getElementById('btnMIX').classList.toggle('active', dir==='mix');
-  // Rebuild queue with new direction
   buildQueue();
-  // Reset UI
   document.getElementById('doneScreen').classList.remove('visible');
-  document.getElementById('cardWrapper') && (document.querySelector('.card-wrapper').style.display='block');
-  document.getElementById('ratingButtons').style.display='grid';
-  document.getElementById('flipHint').style.display='block';
-  if (queue.length===0 && againQueue.length===0) showDone(); else nextCard();
+  document.getElementById('startScreen').classList.remove('visible');
+  if (queue.length===0 && againQueue.length===0) showDone();
+  else { showStudyUI(); nextCard(); }
 }
 
 function nextCard() {
   flipped = false;
   // Hide answer section immediately (no animation = no flash bug)
   document.getElementById('answerSection').classList.remove('visible');
+  document.getElementById('answerSection').style.display = 'none';
   document.getElementById('ratingButtons').classList.add('hidden');
+  document.getElementById('flipHint').style.display = 'block';
   document.getElementById('flipHint').style.opacity = '1';
 
   if (queue.length > 0) current = queue.shift();
@@ -2588,52 +2861,94 @@ function nextCard() {
   updatePills();
 }
 
+function updateNewCards(val) {
+  DAILY_NEW = parseInt(val);
+  localStorage.setItem('dk_daily_new', String(DAILY_NEW));
+  document.getElementById('newCardsVal').textContent = val;
+}
+
+function buildHeatmap() {
+  const history = loadHistory();
+  const grid = document.getElementById('heatmapGrid');
+  grid.innerHTML = '';
+  const days = 112;
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const vals = Object.values(history);
+  const max = vals.length ? Math.max(...vals) : 1;
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const key = d.toISOString().slice(0,10);
+    const count = history[key] || 0;
+    const cell = document.createElement('div');
+    cell.className = 'hm-cell';
+    if (count > 0) {
+      const ratio = count / max;
+      if (ratio < 0.25) cell.classList.add('l1');
+      else if (ratio < 0.5) cell.classList.add('l2');
+      else if (ratio < 0.75) cell.classList.add('l3');
+      else cell.classList.add('l4');
+    }
+    cell.title = key + (count ? ': ' + count + ' cards' : ': no study');
+    grid.appendChild(cell);
+  }
+}
+
 function getDeWord(v) {
   // Strip article and plural forms, return just the base word for TTS
   return v.de.split(',')[0].replace(/^(der|die|das)\s+/i, '').trim();
 }
 
-function speakCurrent(e) {
+function speak(text, e) {
   if (e) e.stopPropagation();
-  if (!current) return;
-  const word = getDeWord(current.v);
   window.speechSynthesis.cancel();
-  const utt = new SpeechSynthesisUtterance(word);
+  const utt = new SpeechSynthesisUtterance(text);
   utt.lang = 'de-DE';
-  utt.rate = 0.85; // slightly slower for clarity
-
-  // Try to find a German voice explicitly
+  utt.rate = 0.85;
   const voices = window.speechSynthesis.getVoices();
   const germanVoice = voices.find(v => v.lang.startsWith('de'));
   if (germanVoice) utt.voice = germanVoice;
-
-  // Visual feedback
   const btns = document.querySelectorAll('.audio-btn');
   btns.forEach(b => b.classList.add('playing'));
   utt.onend = () => btns.forEach(b => b.classList.remove('playing'));
-
   window.speechSynthesis.speak(utt);
+}
+
+function speakWord(e) {
+  if (!current) return;
+  // Speak the full German form as written — e.g. "das Haar, Haare"
+  speak(current.v.de, e);
+}
+
+function speakExample(e) {
+  if (!current) return;
+  // Speak the German example sentence
+  const ex = current.v.ex_de;
+  if (!ex) return;
+  speak(ex, e);
 }
 
 function renderCard(item) {
   const v = item.v, dir = item.dir;
   const isDE = dir === 'de';
 
-  // Front of card
   document.getElementById('cardLabel').textContent = isDE ? 'Deutsch' : 'English';
   document.getElementById('cardWord').textContent = isDE ? v.de : v.en;
   document.getElementById('cardSub').textContent = isDE && v.article ? v.article + ' (article)' : '';
   document.getElementById('cardHint').textContent = 'tap to reveal';
 
-  // Pre-populate answer section (hidden) — no flash since it's display:none
+  // Leech badge + interval previews
+  const k = srsKey(v, dir);
+  const c = srs[k] || {};
+  document.getElementById('leechBadge').classList.toggle('visible', (c.lapses || 0) >= LEECH_THRESHOLD);
+
   document.getElementById('answerLabel').textContent = isDE ? 'English' : 'Deutsch';
   document.getElementById('answerWord').textContent = isDE ? v.en : v.de;
   document.getElementById('answerExDe').textContent = v.ex_de || '';
   document.getElementById('answerExEn').textContent = v.ex_en || '';
 
   // Interval previews
-  const k = srsKey(v, dir);
-  const c = srs[k] || {};
   document.getElementById('intAgain').textContent = intervalLabel(getNextInterval(c,0).dueIn);
   document.getElementById('intHard').textContent = intervalLabel(getNextInterval(c,1).dueIn);
   document.getElementById('intGood').textContent = intervalLabel(getNextInterval(c,2).dueIn);
@@ -2644,21 +2959,88 @@ function flipCard() {
   if (flipped) return;
   flipped = true;
   // Just show the answer section below — no CSS flip animation
+  document.getElementById('answerSection').style.display = 'block';
   document.getElementById('answerSection').classList.add('visible');
   document.getElementById('ratingButtons').classList.remove('hidden');
   document.getElementById('flipHint').style.opacity = '0';
 }
 
+function loadHistory() { try { return JSON.parse(localStorage.getItem(HISTORY_KEY)) || {}; } catch { return {}; } }
+function saveHistory(h) { localStorage.setItem(HISTORY_KEY, JSON.stringify(h)); }
+
+function recordToday(count) {
+  const h = loadHistory();
+  const key = new Date().toISOString().slice(0,10);
+  h[key] = (h[key] || 0) + count;
+  saveHistory(h);
+}
+
+function undoLast() {
+  if (!lastAction) return;
+  if (lastAction.prevSRS) {
+    srs[lastAction.key] = lastAction.prevSRS;
+  } else {
+    delete srs[lastAction.key];
+  }
+  saveSRS(srs);
+
+  if (lastAction.rating === 0) { sessionStats.again = Math.max(0, sessionStats.again - 1); againQueue.pop(); }
+  else if (lastAction.rating === 1) { sessionStats.hard = Math.max(0, sessionStats.hard - 1); doneInSession = Math.max(0, doneInSession - 1); }
+  else { sessionStats.good = Math.max(0, sessionStats.good - 1); doneInSession = Math.max(0, doneInSession - 1); }
+
+  current = lastAction.item;
+  lastAction = null;
+  document.getElementById('undoBtn').disabled = true;
+
+  flipped = false;
+  document.getElementById('answerSection').classList.remove('visible');
+  document.getElementById('answerSection').style.display = 'none';
+  document.getElementById('ratingButtons').classList.add('hidden');
+  document.getElementById('flipHint').style.display = 'block';
+  document.getElementById('flipHint').style.opacity = '1';
+
+  renderCard(current);
+  updateProgress();
+  updatePills();
+  showToast('\u21a9 Undone — re-rate the card');
+}
+
+let lastAction = null;
+
 function rate(rating) {
   if (!flipped || !current) return;
   const k = srsKey(current.v, current.dir);
-  const c = srs[k] || {ef:2.5,interval:0,reps:0};
+  const c = srs[k] || {ef:2.5, interval:0, reps:0, lapses:0};
   const result = getNextInterval(c, rating);
-  srs[k] = {ef:result.ef, interval:result.interval, reps:result.reps, due:Date.now()+result.dueIn};
+
+  // Save snapshot for undo
+  lastAction = {
+    item: current,
+    prevSRS: c ? {...c} : null,
+    key: k,
+    rating,
+    wasInAgain: false
+  };
+  document.getElementById('undoBtn').disabled = false;
+
+  // Track lapses for leech detection
+  const lapses = rating === 0 ? (c.lapses || 0) + 1 : (c.lapses || 0);
+
+  srs[k] = {ef:result.ef, interval:result.interval, reps:result.reps, due:Date.now()+result.dueIn, lapses};
   saveSRS(srs);
-  if (rating===0) { sessionStats.again++; againQueue.push(current); }
-  else if (rating===1) { sessionStats.hard++; doneInSession++; }
+
+  if (rating===0) {
+    sessionStats.again++;
+    againQueue.push(current);
+    // Leech warning
+    if (lapses === LEECH_THRESHOLD) {
+      showToast(`⚠️ Leech: "${current.v.de}" — failed ${lapses} times`);
+    }
+  } else if (rating===1) { sessionStats.hard++; doneInSession++; }
   else { sessionStats.good++; doneInSession++; }
+
+  recordToday(1);
+  buildHeatmap();
   nextCard();
 }
 
@@ -2697,7 +3079,22 @@ function updatePills() {
   document.getElementById('pillAgain').textContent = againQueue.length+' again';
 }
 
+function showStudyUI() {
+  document.getElementById('newCardsBar').style.display = 'none';
+  document.getElementById('heatmapBlock').style.display = 'none';
+  document.getElementById('startScreen').classList.remove('visible');
+  document.querySelector('.card-wrapper').style.display = 'block';
+  document.getElementById('answerSection').style.display = 'none';
+  document.getElementById('ratingButtons').classList.add('hidden');
+  document.getElementById('flipHint').style.display = 'block';
+  document.getElementById('flipHint').style.opacity = '1';
+  document.getElementById('undoBtn').disabled = true;
+  lastAction = null;
+}
+
 function showDone() {
+  document.getElementById('newCardsBar').style.display = '';
+  document.getElementById('heatmapBlock').style.display = '';
   document.querySelector('.card-wrapper').style.display = 'none';
   document.getElementById('answerSection').style.display = 'none';
   document.getElementById('ratingButtons').style.display = 'none';
@@ -2719,23 +3116,71 @@ function showDone() {
   saveSessionNum(loadSessionNum()+1);
 }
 
-function restartSession() {
-  document.querySelector('.card-wrapper').style.display = 'block';
-  document.getElementById('answerSection').style.display = '';
-  document.getElementById('ratingButtons').style.display = 'grid';
-  document.getElementById('flipHint').style.display = 'block';
+function showStartScreen() {
+  // Count what's waiting
+  srs = loadSRS();
+  const now = Date.now();
+  const dirs = getDirections();
+  const allCards = [];
+  for (const dir of dirs) {
+    for (const v of VOCAB) allCards.push({v, dir});
+  }
+  const reviews = allCards.filter(c => { const k = srsKey(c.v, c.dir); return srs[k] && srs[k].due <= now; });
+  const newCards = allCards.filter(c => !srs[srsKey(c.v, c.dir)]).slice(0, DAILY_NEW);
+  const total = reviews.length + newCards.length;
+
+  document.getElementById('startNew').textContent = newCards.length;
+  document.getElementById('startReview').textContent = reviews.length;
+  document.getElementById('startTotal').textContent = total;
+
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? 'Good morning!' : hour < 18 ? 'Good afternoon!' : 'Good evening!';
+  document.getElementById('startGreeting').textContent = greeting;
+
+  if (total === 0) {
+    document.getElementById('startBtn').style.display = 'none';
+    document.getElementById('noCardsMsg').style.display = 'block';
+  } else {
+    document.getElementById('startBtn').style.display = 'block';
+    document.getElementById('noCardsMsg').style.display = 'none';
+  }
+
+  document.getElementById('startScreen').classList.add('visible');
   document.getElementById('doneScreen').classList.remove('visible');
+  document.querySelector('.card-wrapper').style.display = 'none';
+  document.getElementById('answerSection').style.display = 'none';
+  document.getElementById('ratingButtons').style.display = 'none';
+  document.getElementById('flipHint').style.display = 'none';
+  document.getElementById('undoBtn').disabled = true;
+  lastAction = null;
+  buildHeatmap();
+  updateMastery();
+}
+
+function beginSession() {
+  document.getElementById('startScreen').classList.remove('visible');
   buildQueue();
-  if (queue.length===0 && againQueue.length===0) { showDone(); return; }
+  if (queue.length === 0 && againQueue.length === 0) {
+    showDone();
+    return;
+  }
+  showStudyUI();
   nextCard();
+}
+
+function restartSession() {
+  showStartScreen();
 }
 
 // Init
 document.getElementById('sessionCount').textContent = loadSessionNum();
 document.getElementById('streakCount').textContent = loadStreak().count;
-buildQueue();
+const savedNew = parseInt(localStorage.getItem('dk_daily_new') || '10');
+document.getElementById('newCardsSlider').value = savedNew;
+document.getElementById('newCardsVal').textContent = savedNew;
+buildHeatmap();
 updateMastery();
-if (queue.length===0) showDone(); else nextCard();
+showStartScreen();
 </script>
 </body>
 </html>
