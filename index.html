@@ -395,7 +395,7 @@
 
 <div class="flip-hint" id="flipHint" style="display:none">Tap the card to reveal the answer</div>
 
-<div class="rating-buttons hidden" id="ratingButtons">
+<div class="rating-buttons" id="ratingButtons" style="display:none">
   <button class="btn-rate btn-again" onclick="rate(0)">
     <span class="btn-icon">✕</span>
     <span>Again</span>
@@ -2847,7 +2847,7 @@ function nextCard() {
   // Hide answer section immediately (no animation = no flash bug)
   document.getElementById('answerSection').classList.remove('visible');
   document.getElementById('answerSection').style.display = 'none';
-  document.getElementById('ratingButtons').classList.add('hidden');
+  document.getElementById('ratingButtons').style.display = 'none';
   document.getElementById('flipHint').style.display = 'block';
   document.getElementById('flipHint').style.opacity = '1';
 
@@ -2972,7 +2972,7 @@ function flipCard() {
   // Just show the answer section below — no CSS flip animation
   document.getElementById('answerSection').style.display = 'block';
   document.getElementById('answerSection').classList.add('visible');
-  document.getElementById('ratingButtons').classList.remove('hidden');
+  document.getElementById('ratingButtons').style.display = 'grid';
   document.getElementById('flipHint').style.opacity = '0';
 }
 
@@ -3006,7 +3006,7 @@ function undoLast() {
   flipped = false;
   document.getElementById('answerSection').classList.remove('visible');
   document.getElementById('answerSection').style.display = 'none';
-  document.getElementById('ratingButtons').classList.add('hidden');
+  document.getElementById('ratingButtons').style.display = 'none';
   document.getElementById('flipHint').style.display = 'block';
   document.getElementById('flipHint').style.opacity = '1';
 
@@ -3095,7 +3095,7 @@ function showStudyUI() {
   document.getElementById('startScreen').classList.remove('visible');
   document.querySelector('.card-wrapper').style.display = 'block';
   document.getElementById('answerSection').style.display = 'none';
-  document.getElementById('ratingButtons').classList.add('hidden');
+  document.getElementById('ratingButtons').style.display = 'none';
   document.getElementById('flipHint').style.display = 'block';
   document.getElementById('flipHint').style.opacity = '1';
   document.getElementById('undoBtn').disabled = true;
